@@ -1,3 +1,6 @@
+
+PyPI: https://pypi.org/project/django-migration-scripts
+
 ### Installation
 
 ```bash
