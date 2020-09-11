@@ -6,7 +6,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 setup(
     name='django-migration-scripts',
-    version='0.1',
+    version='0.1.1',
     packages=['django_migration_scripts'],
     description='Add migration scripts seamlessly',
     # long_description=README,
