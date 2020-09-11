@@ -2,7 +2,7 @@ import os
 import time
 
 from django.core.management.base import BaseCommand, CommandError
-from scriptsapp.models import MigrationScripts
+from django_migration_scripts import MigrationScripts
 
 template = """from {} import models
 """

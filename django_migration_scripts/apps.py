@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ScriptsappConfig(AppConfig):
-    name = 'scriptsapp'
+    name = 'django_migration_scripts'

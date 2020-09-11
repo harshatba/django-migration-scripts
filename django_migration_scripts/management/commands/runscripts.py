@@ -1,8 +1,8 @@
 import os
 
-from scriptsapp.models import MigrationScripts
+from django_migration_scripts import MigrationScripts
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
