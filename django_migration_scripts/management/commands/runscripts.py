@@ -1,8 +1,9 @@
 import os
 
-from django_migration_scripts import MigrationScripts
-
+from django.apps import apps
 from django.core.management.base import BaseCommand
+
+from django_migration_scripts.models import MigrationScripts
 
 
 class Command(BaseCommand):
@@ -13,13 +14,25 @@ class Command(BaseCommand):
 
     def handle(self, app=None, *args, **options):
         if 'app' in options and not options['app']:
-            queryset = MigrationScripts.objects.filter(applied=False, app=options['app']).order_by('id')
+            apps_to_consider = [options['app']]
         else:
-            queryset = MigrationScripts.objects.filter(applied=False).order_by('id')
+            apps_to_consider = apps.app_configs.keys()
 
-        for migration_script in queryset:
-            script_path = os.getcwd() + '/' + migration_script.app + '/scripts/' + migration_script.name
-            print(script_path)
-            open(script_path).read()
-            exec(open(script_path).read())
-            print(migration_script.name + ' .....DONE')
+        for app in apps_to_consider:
+            path_to_dir = os.getcwd() + '/' + app
+
+            if not os.path.exists(path_to_dir):
+                continue
+
+            scripts_dir = path_to_dir + '/scripts/'
+            if not os.path.exists(scripts_dir):
+                os.makedirs(scripts_dir)
+            filenames = os.listdir(scripts_dir)
+            filenames.sort()
+            for filename in filenames:
+                if not MigrationScripts.objects.filter(app=app, name=filename).exists():
+                    script_path = os.getcwd() + '/' + app + '/scripts/' + filename
+                    open(script_path).read()
+                    exec(open(script_path).read())
+                    print(filename + ' .....DONE')
+                    MigrationScripts.objects.create(app=app, name=filename)

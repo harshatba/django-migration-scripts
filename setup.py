@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.md')).read()
 
 setup(
     name='django-migration-scripts',
-    version='0.1.1',
+    version='0.1.2',
     packages=['django_migration_scripts'],
     description='Add migration scripts seamlessly',
     long_description=README,
