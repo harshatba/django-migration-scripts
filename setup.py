@@ -9,6 +9,7 @@ setup(
     version='0.1.2',
     packages=['django_migration_scripts'],
     description='Add migration scripts seamlessly',
+    long_description_content_type='text/markdown',
     long_description=README,
     author='Harsha Tanguturi',
     author_email='harshatba@gmail.com',
